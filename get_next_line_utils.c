@@ -6,7 +6,7 @@
 /*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 19:00:01 by akarafi           #+#    #+#             */
-/*   Updated: 2021/11/14 09:13:25 by akarafi          ###   ########.fr       */
+/*   Updated: 2021/11/15 20:51:42 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ char	*ft_strdup( char *s1)
 	int		i;
 	char	*s2;
 
+	if (!s1)
+		return (NULL);
 	l = ft_strlen(s1);
 	s2 = (char *) malloc(l + 1);
 	if (!s2)
@@ -69,7 +71,7 @@ int	line_in_full(char *full)
 	{
 		if (*full == '\n')
 			return (1);
-		full++;
+		(full)++;
 	}
 	return (0);
 }
