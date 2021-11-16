@@ -6,7 +6,7 @@
 /*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 18:59:59 by akarafi           #+#    #+#             */
-/*   Updated: 2021/11/16 20:58:47 by akarafi          ###   ########.fr       */
+/*   Updated: 2021/11/16 21:03:28 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char	*trim(char *full)
 		return (NULL);
 	while (full[i] && full[i] != '\n')
 		i++;
-	tmp = ft_strdup(full + i + 1); //gg
+	tmp = ft_strdup(full + i + 1);
 	if (!tmp)
 		return (NULL);
 	free(full);
