@@ -6,7 +6,7 @@
 /*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 18:59:59 by akarafi           #+#    #+#             */
-/*   Updated: 2021/11/16 17:06:05 by akarafi          ###   ########.fr       */
+/*   Updated: 2021/11/16 20:58:47 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ char	*get_next_line(int fd)
 {
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	return (get_line_or_null(fd));
+	return (main_func(fd));
 }
 
-char	*get_line_or_null(int fd)
+char	*main_func(int fd)
 {
 	static char	*full;
 	char		*line;
@@ -38,12 +38,16 @@ char	*get_line_or_null(int fd)
 	}
 	n = read(fd, buffer, BUFFER_SIZE);
 	if (n <= 0)
-		return (return_line_or_null(full));
+	{
+		line = line_or_null(full);
+		full = NULL;
+		return (line);
+	}
 	buffer[n] = 0;
 	full = add_buffer_to_full(buffer, full);
 	if (!full)
 		return (NULL);
-	return (get_line_or_null(fd));
+	return (main_func(fd));
 }
 
 char	*add_buffer_to_full(char *buffer, char *full)
@@ -77,7 +81,7 @@ char	*trim(char *full)
 		return (NULL);
 	while (full[i] && full[i] != '\n')
 		i++;
-	tmp = ft_strdup(full + i + 1);
+	tmp = ft_strdup(full + i + 1); //gg
 	if (!tmp)
 		return (NULL);
 	free(full);

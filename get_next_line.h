@@ -6,7 +6,7 @@
 /*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 18:59:54 by akarafi           #+#    #+#             */
-/*   Updated: 2021/11/16 16:46:16 by akarafi          ###   ########.fr       */
+/*   Updated: 2021/11/16 20:59:07 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_strdup( char *s1);
 char	*trim(char *full);
 char	*get_line(char *full);
 int		line_in_full(char *full);
-char	*get_line_or_null(int fd);
-char	*return_line_or_null(char *full);
+char	*line_or_null(char *full);
+char	*main_func(int fd);
 
 #endif
