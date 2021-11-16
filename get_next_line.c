@@ -6,7 +6,7 @@
 /*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 18:59:59 by akarafi           #+#    #+#             */
-/*   Updated: 2021/11/15 20:57:44 by akarafi          ###   ########.fr       */
+/*   Updated: 2021/11/16 17:06:05 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,43 +16,34 @@
 
 char	*get_next_line(int fd)
 {
-	static char	*full;
-	char		*line;
-	int			n;
-
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	char	buffer[BUFFER_SIZE + 1];
+	return (get_line_or_null(fd));
+}
+
+char	*get_line_or_null(int fd)
+{
+	static char	*full;
+	char		*line;
+	char		buffer[BUFFER_SIZE + 1];
+	int			n;
+
 	if (line_in_full(full))
 	{
 		line = get_line(full);
-		full = trim(full); // leak
+		full = trim(full);
 		if (!full)
 			return (NULL);
 		return (line);
 	}
 	n = read(fd, buffer, BUFFER_SIZE);
 	if (n <= 0)
-	{
-		line = ft_strdup(full);
-		if (full)
-		{
-			if (!*full)
-			{
-				free(full);
-				free(line);
-				return (NULL);
-			}
-			free(full);
-		}
-		full = NULL;
-		return (line);
-	}
+		return (return_line_or_null(full));
 	buffer[n] = 0;
-	full = add_buffer_to_full(buffer, full); // leak
+	full = add_buffer_to_full(buffer, full);
 	if (!full)
 		return (NULL);
-	return (get_next_line(fd));
+	return (get_line_or_null(fd));
 }
 
 char	*add_buffer_to_full(char *buffer, char *full)
@@ -86,7 +77,7 @@ char	*trim(char *full)
 		return (NULL);
 	while (full[i] && full[i] != '\n')
 		i++;
-	tmp = ft_strdup(full + i + 1); //gg
+	tmp = ft_strdup(full + i + 1);
 	if (!tmp)
 		return (NULL);
 	free(full);

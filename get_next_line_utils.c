@@ -6,7 +6,7 @@
 /*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 19:00:01 by akarafi           #+#    #+#             */
-/*   Updated: 2021/11/15 20:51:42 by akarafi          ###   ########.fr       */
+/*   Updated: 2021/11/16 16:48:36 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,23 @@ int	line_in_full(char *full)
 		(full)++;
 	}
 	return (0);
+}
+
+char	*return_line_or_null(char *full)
+{
+	char	*line;
+
+	line = ft_strdup(full);
+	if (full)
+	{
+		if (!*full)
+		{
+			free(full);
+			free(line);
+			return (NULL);
+		}
+		free(full);
+	}
+	full = NULL;
+	return (line);
 }
